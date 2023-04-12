@@ -11,12 +11,7 @@ config["server_setup"] = {
     "port" :24567,
     "vhost":"ADeX-INTERNAL"}
 
-config["local"]={
-    "host":"localhost",
-    "queue":"request-queue"
-}
 config["ppp_contact_details_queue"] = {
-
     "queue": "rpc-adapter-reply-queue"
 }
 
@@ -28,16 +23,13 @@ config["master_data_url"] ={
     "url" : "http://rythubandhu.telangana.gov.in/RB_ADEX_IISC.asmx?op=Get_RB_Master_Data"
 }
 
-
 config["cb_data_url"] ={
     "url" : "http://rythubandhu.telangana.gov.in/RB_ADEX_IISC.asmx?op=Get_CB_Data"
 }
-
 
 config["iudx_credentials"] = {
     "username": "IISC",
     "password": "II$SC@0404"
 }
-
 with open("config_file.ini", "w") as f:
     config.write(f)
