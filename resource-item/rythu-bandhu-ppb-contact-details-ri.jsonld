@@ -1,123 +1,142 @@
 {
-      "@context": "https://agrijson.adex.org.in/",
-      "type": [
-        "iudx:Resource",
-        "iudx:AgriMarket",
-        "adex:Resource",
-        "adex:AgriMarket"
-      ],
-      "id": "rythubandhu.telangana.gov.in/1668984090c7e92e4c39e1e5d29300e6a9b2a11e/gateway.adex.org.in/rythubandhu-schemes/ppb-contact-details",
-      "name": "ppb-contact-details",
-      "label": "Farmer Pattadar PassBook(PPB) Details",
-      "description": "Personal information of farmers such as pattadar passbook, mobile number etc. in Telangana state.",
-      "tags": [
-        "rythu bandhu",
-        "district",
-        "variety",
-        "crop",
-        "commodity",
-        "market",
-        "farmer details",
-        "village",
-        "revenue information",
-        "pattadar passbook number",
-        "ppb"
-      ],
-      "itemStatus": "ACTIVE",
-      "resourceGroup": "rythubandhu.telangana.gov.in/1668984090c7e92e4c39e1e5d29300e6a9b2a11e/gateway.adex.org.in/rythubandhu-schemes",
-      "provider": "rythubandhu.telangana.gov.in/1668984090c7e92e4c39e1e5d29300e6a9b2a11e",
-      "resourceType": "DATASET",
-      "adexResourceAPIs": [
-        "ATTR"
-      ],
-      "iudxResourceAPIs": [
-        "ATTR"
-      ],
-      "location": {
-        "geometry": {
-          "coordinates": [
-            [
-              [
-                77.179011,
-                18.556975
-              ],
-              [
-                77.047585,
-                15.14819
-              ],
-              [
-                81.059914,
-                16.55208
-              ],
-              [
-                81.384916,
-                17.721272
-              ],
-              [
-                80.569225,
-                19.514793
-              ],
-              [
-                78.217742,
-                20.06644
-              ],
-              [
-                77.179011,
-                18.556975
-              ]
-            ]
-          ],
-          "type": "Polygon"
-        },
-        "type": "Place",
-        "address": "Telangana"
-      },
-      "dataDescriptor": {
-        "@context": "https://agrijson.adex.org.in/",
-        "type": [
-          "iudx:DataDescriptor",
-          "iudx:AgriMarket",
-          "adex:DataDescriptor",
-          "adex:AgriMarket"
-        ],
-        "dataDescriptorLabel": "Data Attribute Details of farmer's pattadar passbook in Telangana state",
-        "description": "Data attribute details for personal infromation of farmer as per pattadar passbook",
-        "PPBNo": {
-          "type": [
-            "ValueDescriptor"
-          ],
-          "description": "Pattadar passbook number of the farmer corresponding to this observation.",
-          "dataSchema": "adex:Text"
-        },
-        "FarmerName": {
-          "type": [
-            "ValueDescriptor"
-          ],
-          "description": "Name of the farmer corresponding to this observation.",
-          "dataSchema": "adex:Text"
-        },
-        "MobileNo": {
-          "type": [
-            "ValueDescriptor"
-          ],
-          "description": "Mobile number of the farmer corresponding to this observation.",
-          "dataSchema": "adex:Number",
-          "unitCode": "C62",
-          "unitText": "Dimensionless"
-        },
-        "DataRevdDt": {
-          "type": [
-            "ValueDescriptor"
-          ],
-          "description": "Date on which the data corresponding to this observation is received",
-          "dataSchema": "adex:Text"
-        }
-      },
-      "dataSample": {
-        "PPBNO": "T13010040577",
-        "FarmerName": "చిల్క నిఖిత",
-        "MobileNo": 7730886955,
-        "DataRcvdDt": "21/12/2022"
-      }
+	"@context": "https://agrijson.adex.org.in/",
+	"type": [
+		"iudx:Resource",
+		"iudx:AgriMarket",
+		"adex:Resource",
+		"adex:AgriMarket"
+	],
+	"id": "rythubandhu.telangana.gov.in/1668984090c7e92e4c39e1e5d29300e6a9b2a11e/gateway.adex.org.in/rythubandhu-schemes/ppb-contact-details",
+	"name": "ppb-contact-details",
+	"label": "Farmer Pattadar PassBook(PPB) Details",
+	"description": "Personal information of farmers such as pattadar passbook, mobile number etc. in Telangana state.",
+	"tags": [
+		"rythu bandhu",
+		"district",
+		"variety",
+		"crop",
+		"commodity",
+		"market",
+		"farmer details",
+		"village",
+		"revenue information",
+		"pattadar passbook number",
+		"ppb"
+	],
+	"itemStatus": "ACTIVE",
+	"resourceGroup": "rythubandhu.telangana.gov.in/1668984090c7e92e4c39e1e5d29300e6a9b2a11e/gateway.adex.org.in/rythubandhu-schemes",
+	"provider": "rythubandhu.telangana.gov.in/1668984090c7e92e4c39e1e5d29300e6a9b2a11e",
+	"resourceType": "DATASET",
+	"adexResourceAPIs": [
+		"ATTR"
+	],
+	"iudxResourceAPIs": [
+		"ATTR"
+	],
+	"location": {
+		"geometry": {
+			"coordinates": [
+				[
+					[
+						77.179011,
+						18.556975
+					],
+					[
+						77.047585,
+						15.14819
+					],
+					[
+						81.059914,
+						16.55208
+					],
+					[
+						81.384916,
+						17.721272
+					],
+					[
+						80.569225,
+						19.514793
+					],
+					[
+						78.217742,
+						20.06644
+					],
+					[
+						77.179011,
+						18.556975
+					]
+				]
+			],
+			"type": "Polygon"
+		},
+		"type": "Place",
+		"address": "Telangana"
+	},
+	"dataQueryParams": {
+		"@context": "https://agrijson.adex.org.in/",
+		"type": [
+			"iudx:AgriMarket",
+			"adex:AgriMarket"
+		],
+		"description": "Data query parameter details for personal information of farmer as per pattadar passbook in Telangana state.",
+		"VillCode": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "Village code of the cropland corresponding to this observation, for eg. 2691901."
+		},
+		"SurveyNo": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "The unique code or number assigned to the cropland for adminstrative purpose, for eg. '48ఉ4'."
+		}
+	},
+	"dataDescriptor": {
+		"@context": "https://agrijson.adex.org.in/",
+		"type": [
+			"iudx:DataDescriptor",
+			"iudx:AgriMarket",
+			"adex:DataDescriptor",
+			"adex:AgriMarket"
+		],
+		"dataDescriptorLabel": "Data Descriptor for farmer's pattadar passbook in Telangana state",
+		"description": "Data attribute details for personal information of farmer as per pattadar passbook in Telangana state.",
+		"PPBNo": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "Pattadar passbook number of the farmer corresponding to this observation.",
+			"dataSchema": "adex:Text"
+		},
+		"FarmerName": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "Name of the farmer corresponding to this observation.",
+			"dataSchema": "adex:Text"
+		},
+		"MobileNo": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "Mobile number of the farmer corresponding to this observation.",
+			"dataSchema": "adex:Number",
+			"unitCode": "C62",
+			"unitText": "Dimensionless"
+		},
+		"DataRcvdDt": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "Date on which the data corresponding to this observation is received",
+			"dataSchema": "adex:Text"
+		}
+	},
+	"dataSample": {
+		"PPBNO": "T2901123060423",
+		"FarmerName": "భూక్యా భంగ్య",
+		"MobileNo": 77354586955,
+		"DataRcvdDt": "21/12/2022"
+	}
 }
-  
