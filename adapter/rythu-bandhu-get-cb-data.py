@@ -1,7 +1,6 @@
 import datetime
 import json
 import logging
-import sys
 import urllib.error
 from configparser import ConfigParser
 from urllib.parse import urlparse
@@ -11,7 +10,7 @@ import pika
 import xmltodict
 
 config = ConfigParser(interpolation=None)
-config.read("config_file.ini")
+config.read("../config/config_file.ini")
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 time_format = "%Y-%m-%dT%H:%M:%SZ"
@@ -83,7 +82,7 @@ class rabbitmqServer(object):
             properties=pika.BasicProperties(correlation_id = corr_id),
             body=message
             )
-        
+                
         self.channel.basic_ack(delivery_tag=method.delivery_tag)
 
         logging.info(".......Message is published.......")
@@ -189,6 +188,7 @@ class get_cb_data:
 
         return attr_dict
     
+
     def temporal_end_dict(self, query_type):
 
         """
@@ -206,7 +206,8 @@ class get_cb_data:
             temporal_dict["EndDate"] = end_date_value.strftime(time_formatter)
 
             return temporal_dict
-        
+
+
     def getData(self, end_dict):
 
         """
@@ -218,39 +219,34 @@ class get_cb_data:
         dictionary ={}
 
         try:
-            if end_dict["ppbnumber"]==self.json_object["ppbNumber"]:
-
-                url = self.url
-                
-                payload =  """<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-                                <soap:Body>
-                                    <Get_CB_Data xmlns="http://tempuri.org/">
-                                    <WS_UserName>{}</WS_UserName>
-                                    <WS_Password>{}</WS_Password>
-                                    <Finyear>{}</Finyear>
-                                    <Season>{}</Season>
-                                    <DistCode>{}</DistCode>
-                                    <MandCode>{}</MandCode>
-                                    <VillCode>{}</VillCode>
-                                    <StartDate>{}</StartDate>
-                                    <EndDate>{}</EndDate>
-                                    </Get_CB_Data>
-                                </soap:Body>
-                            </soap:Envelope>""".format(self.iudx_username, self.iudx_password, end_dict["Finyear"], end_dict["Season"], end_dict["DistCode"], end_dict["MandCode"], end_dict["VillCode"], end_dict["StartDate"], end_dict["EndDate"])
-
-                headers = {
-                    'Content-Type': 'text/xml'
-                    }
-
-                req = Request(url, payload.encode('utf-8'), headers=headers )
-                response = urlopen(req)
-                status = response.getcode()
-
-                dictionary = self.fetch_response(status, response, dictionary)
             
-            else:
-                dictionary["statusCode"] = 401 
-                dictionary["details"] = "PPB Number is mismatched"
+            url = self.url
+            
+            payload =  """<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+                            <soap:Body>
+                                <Get_CB_Data xmlns="http://tempuri.org/">
+                                <WS_UserName>{}</WS_UserName>
+                                <WS_Password>{}</WS_Password>
+                                <Finyear>{}</Finyear>
+                                <Season>{}</Season>
+                                <DistCode>{}</DistCode>
+                                <MandCode>{}</MandCode>
+                                <VillCode>{}</VillCode>
+                                <StartDate>{}</StartDate>
+                                <EndDate>{}</EndDate>
+                                </Get_CB_Data>
+                            </soap:Body>
+                        </soap:Envelope>""".format(self.iudx_username, self.iudx_password, end_dict["Finyear"], end_dict["Season"], end_dict["DistCode"], end_dict["MandCode"], end_dict["VillCode"], end_dict["StartDate"], end_dict["EndDate"])
+
+            headers = {
+                'Content-Type': 'text/xml'
+                }
+
+            req = Request(url, payload.encode('utf-8'), headers=headers )
+            response = urlopen(req)
+            status = response.getcode()
+
+            dictionary = self.fetch_response(status, response, dictionary)
 
         except urllib.error.HTTPError as eh:
             
@@ -290,10 +286,9 @@ class get_cb_data:
         if status==200:
             soap = resp_dict["soap:Envelope"]["soap:Body"]
 
-            if not soap.get("soap:Fault", None):
-                response_json = json.loads(soap["Get_CB_DataResponse"]["Get_CB_DataResult"])
-                success_flag = response_json["SuccessFlag"]
-                success_msg = response_json["SuccessMsg"]
+            response_json = json.loads(soap["Get_CB_DataResponse"]["Get_CB_DataResult"])
+            success_flag = response_json["SuccessFlag"]
+            success_msg = response_json["SuccessMsg"]
 
             if success_flag == "E":
                 dictionary['statusCode'] =  204
@@ -314,12 +309,12 @@ if __name__ == '__main__':
     host = config["server_setup"]["host"]
     port = config["server_setup"]["port"]
     vhost = config["server_setup"]["vhost"]
-    queue = config["ppp_contact_details_queue"]["queue"]
+    queue = config["cb_data_queue"]["queue"]
     url = config["cb_data_url"]["url"]
     iudx_username = config["iudx_credentials"]["username"]
     iudx_password = config["iudx_credentials"]["password"]
     
     cd = get_cb_data(url, queue, iudx_username, iudx_password)
-    serverconfigure = RabbitMqServerConfigure( host, queue)
+    serverconfigure = RabbitMqServerConfigure( username, password, host, port, vhost, queue)
     server = rabbitmqServer(server=serverconfigure)
     server.startserver(cd.process_request)

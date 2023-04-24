@@ -9,7 +9,7 @@ from urllib.parse import urlparse
 import xmltodict
 
 config = ConfigParser(interpolation=None)
-config.read("config_file.ini")
+config.read("../config/config_file.ini")
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
@@ -79,6 +79,8 @@ class rabbitmqServer(object):
             properties=pika.BasicProperties(correlation_id = corr_id),
             body=message
             )
+
+        print(message)
         
         self.channel.basic_ack(delivery_tag=method.delivery_tag)
 
@@ -124,14 +126,8 @@ class master_data:
         error_dict = {}
         
         try:
-            query=self.json_object["searchType"]
-            query_list=query.split("_")
-
-            if "attributeSearch" in query_list:
-                attribute_dict = self.attribute_end_dict("attr-query")
-
-            end_dict = attribute_dict
-            self.getData(end_dict)
+            
+            self.getData()
             return
 
         except KeyError as ek:
@@ -150,26 +146,7 @@ class master_data:
 
         server.publish(error_dict, self.rout_key, self.corr_id, self.method) 
 
-    def attribute_end_dict(self, query_type):
-
-        """
-        Forming the end point
-        :params query_type: attribute query
-        :return attribute endpoint: attribute endpoint consists of attribute queries
-        """
-
-        attr_list = self.json_object[query_type].split(";")
-        
-        attr_dict = {}
-
-        for attr in attr_list: 
-
-            if "ppbnumber" in attr:
-                attr_dict["ppbnumber"] = attr.replace("ppbnumber==","")
-
-        return attr_dict
-
-    def getData(self, end_dict):
+    def getData(self):
 
         """
         Fetching from seeding api
@@ -180,32 +157,26 @@ class master_data:
         dictionary ={}
 
         try:
-            if end_dict["ppbnumber"]==self.json_object["ppbNumber"]:
 
-                url = self.url                
-                payload =  """<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-                                <soap:Body>
-                                    <Get_RB_Master_Data xmlns="http://tempuri.org/">
-                                    <WS_UserName>{}</WS_UserName>
-                                    <WS_Password>{}</WS_Password>
-                                    </Get_RB_Master_Data>
-                                </soap:Body>
-                            </soap:Envelope>""".format(self.iudx_username, self.iudx_password)
-                
-                headers = {
-                    'Content-Type': 'text/xml'
-                    }
+            url = self.url                
+            payload =  """<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+                            <soap:Body>
+                                <Get_RB_Master_Data xmlns="http://tempuri.org/">
+                                <WS_UserName>{}</WS_UserName>
+                                <WS_Password>{}</WS_Password>
+                                </Get_RB_Master_Data>
+                            </soap:Body>
+                        </soap:Envelope>""".format(self.iudx_username, self.iudx_password)
+            
+            headers = {
+                'Content-Type': 'text/xml'
+                }
 
-                req = Request(url, payload.encode('utf-8'), headers=headers )
-                response = urlopen(req)
-                status = response.getcode()
+            req = Request(url, payload.encode('utf-8'), headers=headers )
+            response = urlopen(req)
+            status = response.getcode()
 
-                dictionary = self.fetch_response(status, response, dictionary)
-
-
-            else:
-                dictionary["statusCode"] = 401 
-                dictionary["details"] = "PPB Number is mismatched"
+            dictionary = self.fetch_response(status, response, dictionary)
 
         except urllib.error.HTTPError as eh:
             
@@ -245,19 +216,17 @@ class master_data:
         if status==200:
             soap = resp_dict["soap:Envelope"]["soap:Body"]
 
-            if not soap.get("soap:Fault", None):
-                response_json = json.loads(soap["Get_RB_Master_DataResponse"]["Get_RB_Master_DataResult"])
-                success_flag = response_json["SuccessFlag"]
-                success_msg = response_json["SuccessMsg"]
+            response_json = json.loads(soap["Get_RB_Master_DataResponse"]["Get_RB_Master_DataResult"])
+            success_flag = response_json["SuccessFlag"]
+            success_msg = response_json["SuccessMsg"]
 
+            if success_flag == "1":
+                dictionary['statusCode'] =  status
+                dictionary["results"] = response_json["Data"]
 
-                if success_flag == "1":
-                    dictionary['statusCode'] =  status
-                    dictionary["results"] = response_json["Data"]
-
-                else:
-                    dictionary['statusCode'] =  204
-                    dictionary["details"] = success_msg
+            else:
+                dictionary['statusCode'] =  204
+                dictionary["details"] = success_msg
 
         return dictionary
 
@@ -266,10 +235,10 @@ if __name__ == '__main__':
 
     username = config["server_setup"]["username"]
     password = config["server_setup"]["password"]
-    host = config["local"]["host"]
+    host = config["server_setup"]["host"]
     port = config["server_setup"]["port"]
     vhost = config["server_setup"]["vhost"]
-    queue = config["ppp_contact_details_queue"]["queue"]
+    queue = config["master_data_queue"]["queue"]
     url = config["master_data_url"]["url"]
 
 

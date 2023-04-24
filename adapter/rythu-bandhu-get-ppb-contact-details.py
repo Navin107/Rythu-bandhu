@@ -9,7 +9,7 @@ from urllib.parse import urlparse
 import xmltodict
 
 config = ConfigParser(interpolation=None)
-config.read("config_file.ini")
+config.read("../config/config_file.ini")
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
@@ -166,20 +166,17 @@ class ppb_contact_details:
 
         for attr in attr_list: 
 
-            if "villcode" in attr:
-                attr_dict["villcode"] = attr.replace("villcode==","")
+            if "VillCode" in attr:
+                attr_dict["VillCode"] = attr.replace("VillCode==","")
 
-            elif "surveyno" in attr:
-                attr_dict["surveyno"] = attr.replace("surveyno==","")
-
-            elif "ppbnumber" in attr:
-                attr_dict["ppbnumber"] = attr.replace("ppbnumber==","")
+            elif "SurveyNo" in attr:
+                attr_dict["SurveyNo"] = attr.replace("SurveyNo==","")
             
             else:
                 pass
 
         return attr_dict
-
+    
     def getData(self, end_dict):
 
         """
@@ -190,35 +187,29 @@ class ppb_contact_details:
 
         dictionary ={}
 
-
         try:
-            if end_dict["ppbnumber"]==self.json_object["ppbNumber"]:
-                url = self.url
-                
-                payload =  """<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-                                    <soap:Body>
-                                        <Get_PPB_ContactDtls xmlns="http://tempuri.org/">
-                                        <WS_UserName>{}</WS_UserName>
-                                        <WS_Password>{}</WS_Password>
-                                        <VillCode>{}</VillCode>
-                                        <SurveyNo>{}</SurveyNo>
-                                        </Get_PPB_ContactDtls>
-                                    </soap:Body>
-                            </soap:Envelope>""".format(self.iudx_username, self.iudx_password, end_dict["villcode"], end_dict["surveyno"] )
-                
-                headers = {
-                    'Content-Type': 'text/xml'
-                    }
+            url = self.url
+            
+            payload =  """<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+                                <soap:Body>
+                                    <Get_PPB_ContactDtls xmlns="http://tempuri.org/">
+                                    <WS_UserName>{}</WS_UserName>
+                                    <WS_Password>{}</WS_Password>
+                                    <VillCode>{}</VillCode>
+                                    <SurveyNo>{}</SurveyNo>
+                                    </Get_PPB_ContactDtls>
+                                </soap:Body>
+                        </soap:Envelope>""".format(self.iudx_username, self.iudx_password, end_dict["VillCode"], end_dict["SurveyNo"] )
+            
+            headers = {
+            'Content-Type': 'text/xml;charset=UTF-8"'
+            }
 
-                req = Request(url, payload.encode('utf-8'), headers=headers )
-                response = urlopen(req)
-                status = response.getcode()
+            req = Request(url, payload.encode('utf-8'), headers=headers )
+            response = urlopen(req)
+            status = response.getcode()
 
-                dictionary = self.fetch_response(status, response, dictionary)
-
-            else:
-                dictionary["statusCode"] = 401 
-                dictionary["details"] = "PPB Number is mismatched"
+            dictionary = self.fetch_response(status, response, dictionary)
             
         except urllib.error.HTTPError as eh:
             
@@ -256,18 +247,24 @@ class ppb_contact_details:
         if status==200:
             soap = resp_dict["soap:Envelope"]["soap:Body"]
 
-            if not soap.get("soap:Fault", None):
-                response_json = json.loads(soap["Get_PPB_ContactDtlsResponse"]["Get_PPB_ContactDtlsResult"])
-                success_flag = response_json["SuccessFlag"]
-                success_msg = response_json["SuccessMsg"]
+            response_json = json.loads(soap["Get_PPB_ContactDtlsResponse"]["Get_PPB_ContactDtlsResult"])
+            success_flag = response_json["SuccessFlag"]
+            success_msg = response_json["SuccessMsg"]
 
-                if success_flag == "1":
+            if success_flag == "1":
+                json_packet = response_json["Data"]
+                
+                if json_packet[0]["PPBNO"] ==self.json_object["ppbNumber"]:
                     dictionary['statusCode'] =  status
-                    dictionary["results"] = response_json["Data"]
+                    dictionary["results"] = json_packet
 
                 else:
-                    dictionary['statusCode'] =  204
-                    dictionary["details"] = success_msg
+                    dictionary["statusCode"] = 401 
+                    dictionary["details"] = "PPB Number is mismatched"
+
+            else:
+                dictionary['statusCode'] =  204
+                dictionary["details"] = success_msg
 
         return dictionary
 
