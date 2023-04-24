@@ -177,14 +177,16 @@ class get_cb_data:
 
             if "Finyear" in attr:
                 attr_dict["Finyear"] = attr.replace("Finyear==","")
-            if "Season" in attr:
+            elif "Season" in attr:
                 attr_dict["Season"] = attr.replace("Season==","")
-            if "DistCode" in attr:
+            elif "DistCode" in attr:
                 attr_dict["DistCode"] = attr.replace("DistCode==","")
-            if "MandCode" in attr:
+            elif "MandCode" in attr:
                 attr_dict["MandCode"] = attr.replace("MandCode==","")
             elif "VillCode" in attr:
                 attr_dict["VillCode"] = attr.replace("VillCode==","")
+            else:
+                pass
 
         return attr_dict
     
