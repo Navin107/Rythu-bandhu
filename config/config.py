@@ -11,6 +11,13 @@ config["server_setup"] = {
     "port" :24567,
     "vhost":"ADeX-INTERNAL"}
 
+
+config["local"] = {
+    "host" :"localhost",
+    "queue" :"request-queue "
+    }
+
+
 config["ppp_contact_details_queue"] = {
     "queue": "rpc-adapter-reply-queue"
 }
@@ -25,6 +32,10 @@ config["master_data_url"] ={
 
 config["cb_data_url"] ={
     "url" : "http://rythubandhu.telangana.gov.in/RB_ADEX_IISC.asmx?op=Get_CB_Data"
+}
+
+config["get_farmer_crop_data_url"] = {
+    "url": "http://rythubandhu.telangana.gov.in/RB_ADEX_IISC.asmx?op=Get_Farmer_CropData_ByPPBNo"
 }
 
 config["iudx_credentials"] = {
