@@ -1,0 +1,276 @@
+{
+	"@context": "https://voc.iudx.org.in/",
+	"type": [
+		"adex:Resource",
+		"adex:Crop",
+		"iudx:Resource",
+		"iudx:Crop"
+	],
+	"id": "rythubandhu.telangana.gov.in/1668984090c7e92e4c39e1e5d29300e6a9b2a11e/gateway.adex.org.in/rythubandhu-schemes/get-cb-data",
+	"name": "get-cb-data",
+	"label": "Crop and Cropland Information in Telangana State",
+	"description": "Publishes information about the crops that are sown in the agricultural land of the Telangana State.",
+	"tags": [
+		"land",
+		"crop",
+		"crop type",
+		"district",
+		"irrigation",
+		"area sown",
+		"land details"
+	],
+	"itemStatus": "ACTIVE",
+	"resourceGroup": "rythubandhu.telangana.gov.in/1668984090c7e92e4c39e1e5d29300e6a9b2a11e/gateway.adex.org.in/rythubandhu-schemes",
+	"provider": "rythubandhu.telangana.gov.in/1668984090c7e92e4c39e1e5d29300e6a9b2a11e",
+	"resourceType": "MESSAGESTREAM",
+	"adexResourceAPIs": [
+		"ATTR",
+		"TEMPORAL"
+	],
+	"iudxResourceAPIs": [
+		"ATTR",
+		"TEMPORAL"
+	],
+	"location": {
+		"geometry": {
+			"coordinates": [
+				[
+					[
+						77.179011,
+						18.556975
+					],
+					[
+						77.047585,
+						15.14819
+					],
+					[
+						81.059914,
+						16.55208
+					],
+					[
+						81.384916,
+						17.721272
+					],
+					[
+						80.569225,
+						19.514793
+					],
+					[
+						78.217742,
+						20.06644
+					],
+					[
+						77.179011,
+						18.556975
+					]
+				]
+			],
+			"type": "Polygon"
+		},
+		"type": "Place",
+		"address": "Telangana"
+	},
+	"dataQueryParams": {
+		"@context": "https://agrijson.adex.org.in/",
+		"type": [
+			"iudx:Crop",
+			"adex:Crop"
+		],
+		"description": "Data query parameter details of Crop sown in the agricultural land in Telangana state.",
+		"Finyear": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "The financial year in which the crop is cultivated corresponding to this observation, for eg. 2022."
+		},
+		"Season": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "Season of the Agricultural year in which the crop corresponding to this observation was grown. There are three seasons represented by its season numbers 1, 2 and 3, where 1 - 'Vanakalam', 2 - 'Yasangi' and 3 - 'Summer'."
+		},
+		"DistCode": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "District code of the cropland corresponding to this observation, for eg. 11."
+		},
+		"MandCode": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "Mandal code of the cropland corresponding to this observation, for eg. 243."
+		},
+		"VillCode": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "Village code of the cropland corresponding to this observation, for eg. 991211993."
+		},
+		"StartDate": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "Describes the initial scheduled datetime of the record corresponding to this observation and is described in '%Y-%m-%dT%H:%M:%SZ'  format, for eg. '2022-08-22T12:01:05Z'."
+		},
+		"EndDate": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "Describes the final scheduled datetime of the record corresponding to this observation and is described in '%Y-%m-%dT%H:%M:%SZ' format, for eg. '2022-08-22T12:10:05Z'."
+		}
+	},
+	"dataDescriptor": {
+		"@context": "https://agrijson.adex.org.in/",
+		"type": [
+			"iudx:DataDescriptor",
+			"iudx:Crop",
+			"adex:DataDescriptor",
+			"adex:Crop"
+		],
+		"dataDescriptorLabel": "Data descriptor for Crop Information in Telangana State",
+		"description": "Data attribute details of Crop sown in the agricultural land in Telangana State.",
+		"Flag": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "The flag value corresponding to this observation.",
+			"dataSchema": "iudx:Number",
+			"unitCode": "C62",
+			"unitText": "Dimensionless"
+		},
+		"FinYear": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "The financial year in which the crop is cultivated corresponding to this observation.",
+			"dataSchema": "iudx:Number",
+			"unitCode": "C62",
+			"unitText": "Dimensionless"
+		},
+		"Season": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "Season of the Agricultural year in which the crop corresponding to this observation was grown. There are three seasons represented by its season numbers 1, 2 and 3, where 1 - 'Vanakalam', 2 - 'Yasangi' and 3 - 'Summer'.",
+			"dataSchema": "iudx:Number",
+			"unitCode": "C62",
+			"unitText": "Dimensionless"
+		},
+		"District": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "The name of the district at which the parcel land is located.",
+			"dataSchema": "adex:Text"
+		},
+		"Mandal": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "The name of the mandal at which the parcel land is located.",
+			"dataSchema": "adex:Text"
+		},
+		"Cluster": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "The name of the cluster at which the parcel land is located.",
+			"dataSchema": "adex:Text"
+		},
+		"Village": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "The name of the village at which the parcel land is located.",
+			"dataSchema": "adex:Text"
+		},
+		"BaseSurveyNo": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "The base survey number assigned to the parcel land corresponding to this observation.",
+			"dataSchema": "adex:Text"
+		},
+		"SurveyNo": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "The unique code or number assigned to the parcel land for adminstrative purpose.",
+			"dataSchema": "adex:Text"
+		},
+		"SurveyExtent": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"dataSchema": "iudx:Number",
+			"unitCode": "C62",
+			"unitText": "Dimensionless",
+			"description": "The extent of the parcel land in accordance with the cadastre."
+		},
+		"sourceofIrrigation": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "The various types of irrigation for the agricultural land corresponding to this observation.",
+			"dataSchema": "adex:Text"
+		},
+		"CropName": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "The name of the crop sown in the agricultural land corresponding to this observation.",
+			"dataSchema": "adex:Text"
+		},
+		"CropVarietyName": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "The unique code for variety of the crop sown in the agricultural land corresponding to this observation.",
+			"dataSchema": "adex:Text"
+		},
+		"CropSown_Acres": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "The extent of the parcel agricultural land which is measured in Acres.",
+			"dataSchema": "iudx:Number",
+			"unitCode": "C62",
+			"unitText": "Dimensionless"
+		},
+		"CropSown_Guntas": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "The extent of the parcel agricultural land which is measured in Guntas.",
+			"dataSchema": "iudx:Number",
+			"unitCode": "C62",
+			"unitText": "Dimensionless"
+		},
+		"CropInfo_Dt": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "Describes the datetime of the crop information corresponding to this observation",
+			"dataSchema": "adex:Text"
+		}
+	},
+	"dataSample": {
+		"Flag": 1,
+		"FinYear": 2022,
+		"Season": 1,
+		"District": "KHAMMAM",
+		"Mandal": "BONAKAL",
+		"Cluster": "LAXMIPURAM",
+		"Village": "TUTIKUNTLA",
+		"BaseSurveyNo": "45",
+		"SurveyNo": "45అ",
+		"SurveyExtent": 0.375,
+		"SourceofIrrigation": "Tank",
+		"CropName": " Paddy",
+		"CropVarietyName": "BPT 5204",
+		"CropSown_Acres": 0,
+		"CropSown_Guntas": 37,
+		"CropInfo_Dt": "Aug 22 2022 12:01PM"
+	}
+}
