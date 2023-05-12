@@ -17,9 +17,20 @@ config["local"] = {
     "queue" :"request-queue "
     }
 
-
 config["ppp_contact_details_queue"] = {
-    "queue": "rpc-adapter-reply-queue"
+"queue": "rpc-contact_details"
+}
+
+config["master_data_queue"] = {
+"queue":"rpc-master_data"
+}
+
+config["cb_data_queue"] = {
+"queue":"rpc-cb_data"
+}
+
+config["farmer_data_queue"] = {
+"queue":"rpc_farmer-data"
 }
 
 config["ppp_contact_details_url"] ={

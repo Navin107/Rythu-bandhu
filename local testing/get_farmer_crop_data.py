@@ -88,7 +88,7 @@ class rabbitmqServer(object):
 
         print("Published Message: {}".format(payload))
 
-class get_cb_data:
+class get_farmer_data:
 
     def __init__(self, url, queue, iudx_username, iudx_password):
 
@@ -290,7 +290,6 @@ class get_cb_data:
                 dictionary['statusCode'] =  status
                 dictionary["results"] = response_json["Data"]
 
-
         return dictionary
 
 if __name__ == '__main__':
@@ -301,7 +300,7 @@ if __name__ == '__main__':
     url = config["get_farmer_crop_data_url"]["url"]
     iudx_username = config["iudx_credentials"]["username"]
     iudx_password = config["iudx_credentials"]["password"]
-    cd = get_cb_data(url, queue, iudx_username, iudx_password)
+    cd = get_farmer_data(url, queue, iudx_username, iudx_password)
     serverconfigure = RabbitMqServerConfigure( host, queue)
     server = rabbitmqServer(server=serverconfigure)
     server.startserver(cd.process_request)
