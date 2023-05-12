@@ -129,7 +129,7 @@ json_object = {
 		"endtime": "2022-08-22T12:10:05Z",
 		"timerel": "during"
 	},
-	"attr-query": "PPBNO==T13010130530",
+	"attr-query": "Ppbno==T13010130530",
 	"searchType": "temporalSearch_attributeSearch",
 	"instanceID": "localhost:8443",
 	"applicableFilters": [

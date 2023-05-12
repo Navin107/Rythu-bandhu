@@ -8,7 +8,7 @@
 	],
 	"id": "rythubandhu.telangana.gov.in/1668984090c7e92e4c39e1e5d29300e6a9b2a11e/gateway.adex.org.in/rythubandhu-schemes/get-farmer-crop-data",
 	"name": "get-farmer-crop-data",
-	"label": "Farmer Pattadar PassBook(PPB) Details and Cropland Information and in Telangana State",
+	"label": "Crop and Cropland Information for Farmer Pattadar PassBook(PPB) Numbers in Telangana State",
 	"description": "Publishes information of farmers such as name, mobile number and the crops that are sown in the agricultural land of the Telangana State.",
 	"tags": [
 		"land",
@@ -81,7 +81,7 @@
 			"iudx:Crop",
 			"adex:Crop"
 		],
-		"description": "Data query parameter details of personal information of farmer as per pattadar passbook(PPB) and crop sown in the agricultural land in Telangana state.",
+		"description": "Data query parameter details of crop and cropland information for farmer pattadar passBook(PPB) numbers in Telangana state.",
 		"PPBNO": {
 			"type": [
 				"ValueDescriptor"
@@ -116,8 +116,8 @@
 			"adex:DataDescriptor",
 			"adex:Crop"
 		],
-		"dataDescriptorLabel": "Data descriptor for farmer's pattadar passbook and Crop Information in Telangana State",
-		"description": "Data attribute details of Crop sown in the agricultural land in Telangana State.",
+		"dataDescriptorLabel": "Data descriptor for Crop and Cropland info as per Pattadar Passbook Number in Telangana State",
+		"description": "Data attribute details of crop and cropland information for farmer pattadar passBook(PPB) numbers in Telangana State.",
 		"FarmerName": {
 			"type": [
 				"ValueDescriptor"

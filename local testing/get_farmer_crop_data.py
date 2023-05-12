@@ -6,7 +6,7 @@ import urllib.error
 from configparser import ConfigParser
 from urllib.parse import urlparse
 from urllib.request import Request, urlopen
-
+import re
 import pika
 import xmltodict
 
@@ -171,16 +171,14 @@ class get_cb_data:
         """
 
         attr_list = self.json_object[query_type].split(";")
-        
         attr_dict = {}
 
         for attr in attr_list: 
 
-            if "PPBNO" in attr:
-                attr_dict["PPBNO"] = attr.replace("PPBNO==","")
-            else:
-                pass
-
+            match = re.search(r'[pP][pP][bB][nN][oO][=][=]', attr)
+            if match!=None:
+                print(attr)
+                attr_dict["PPBNO"] = re.sub(r'[pP][pP][bB][nN][oO][=][=]','',attr)
 
         return attr_dict
     
