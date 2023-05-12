@@ -1,6 +1,7 @@
 import datetime
 import json
 import logging
+import re
 import urllib.error
 from configparser import ConfigParser
 from urllib.parse import urlparse
@@ -87,7 +88,7 @@ class rabbitmqServer(object):
 
         logging.info(".......Message is published.......")
 
-class get_cb_data:
+class get_farmer_data:
 
     def __init__(self, url, queue, iudx_username, iudx_password):
 
@@ -176,7 +177,6 @@ class get_cb_data:
 
             match = re.search(r'[pP][pP][bB][nN][oO][=][=]', attr)
             if match!=None:
-                print(attr)
                 attr_dict["PPBNO"] = re.sub(r'[pP][pP][bB][nN][oO][=][=]','',attr)
 
         return attr_dict
@@ -298,12 +298,12 @@ if __name__ == '__main__':
     host = config["server_setup"]["host"]
     port = config["server_setup"]["port"]
     vhost = config["server_setup"]["vhost"]
-    queue = config["cb_data_queue"]["queue"]
+    queue = config["farmer_data_queue"]["queue"]
     url = config["get_farmer_crop_data_url"]["url"]
     iudx_username = config["iudx_credentials"]["username"]
     iudx_password = config["iudx_credentials"]["password"]
     
-    cd = get_cb_data(url, queue, iudx_username, iudx_password)
+    cd = get_farmer_data(url, queue, iudx_username, iudx_password)
     serverconfigure = RabbitMqServerConfigure( username, password, host, port, vhost, queue)
     server = rabbitmqServer(server=serverconfigure)
     server.startserver(cd.process_request)
