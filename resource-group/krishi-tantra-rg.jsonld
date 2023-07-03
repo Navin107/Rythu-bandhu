@@ -1,0 +1,38 @@
+{
+    "@context": "https://agrijson.adex.org.in/",
+    "type": [
+      "iudx:ResourceGroup",
+      "iudx:AgriMarket",
+      "iudx:Crop",
+      "adex:ResourceGroup",
+      "adex:AgriMarket",
+      "adex:Crop"
+    ],
+    "id": "krishitantra.com/dd9561b09f5d63b59160388f96085a55d24e7795/gateway.adex.org.in/krishitantra-data",
+    "name": "krishitantra-data",
+    "label": "Krishitantra Agricultural Data",
+    "description": "Information of crop details of a cropland in Telangana state.",
+    "tags": [
+      "krishitantra",
+      "variety",
+      "crop",
+      "commodity",
+      "market",
+      "village",
+      "land",
+      "crop",
+      "crop type",
+      "irrigation",
+      "area sown",
+      "land details"
+    ],
+    "accessPolicy": "PII",
+    "provider": "krishitantra.com/dd9561b09f5d63b59160388f96085a55d24e7795",
+    "authControlLevel": "GROUP",
+    "itemStatus": "ACTIVE",
+    "resourceServer": "datakaveri.org/5841d4c98a9ef8ab708e01a3c5fc1ab955e6ada0/gateway.adex.org.in",
+    "location": {
+      "type": "Place",
+      "address": "KrishiTantra, Telangana"
+    }
+}

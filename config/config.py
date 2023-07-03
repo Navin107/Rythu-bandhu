@@ -49,6 +49,15 @@ config["get_farmer_crop_data_url"] = {
     "url": "http://rythubandhu.telangana.gov.in/RB_ADEX_IISC.asmx?op=Get_Farmer_CropData_ByPPBNo"
 }
 
+config["krishi_tantra_url"] = {
+    "url": "https://soilv3-api-prod.krishitantra.com/"
+}
+
+config["krishi_tantra_url"] = {
+    "url": "https://soilv3-api-prod.krishitantra.com/"
+}
+
+
 config["iudx_credentials"] = {
     "username": "IISC",
     "password": "II$SC@0404"

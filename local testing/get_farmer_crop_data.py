@@ -9,6 +9,7 @@ from urllib.request import Request, urlopen
 import re
 import pika
 import xmltodict
+from dateutil import parser
 
 config = ConfigParser(interpolation=None)
 config.read("../config/config_file.ini")
@@ -74,8 +75,8 @@ class rabbitmqServer(object):
         :param payload: JSON payload
         :param rout_key: reply queue
         :param corr_id: correlation id 
-#         :return: None
-#         """
+        :return: None
+         """
 
         message = json.dumps({"message": payload, "routing_key":rout_key, "correlation_id":corr_id})
         self.channel.basic_publish(
@@ -86,7 +87,7 @@ class rabbitmqServer(object):
             )
         # self.channel.basic_ack(delivery_tag=method.delivery_tag)
 
-        print("Published Message: {}".format(payload))
+        print(f"Published Message: {payload}")
 
 class get_farmer_data:
 
@@ -150,14 +151,14 @@ class get_farmer_data:
 
             logging.error("A Key error occurred: {}".format(ek))
 
-            error_dict["status"] = 400
+            error_dict["statusCode"] = 400
             error_dict["details"] = f"Keyerror: Key {str(ek)} not found in the json request body"
 
         except Exception as e:  
 
             logging.error("An Unknown Error occurred: {}".format(e))
 
-            error_dict["status"] = 400
+            error_dict["statusCode"] = 400
             error_dict["details"] = str(e)
 
         server.publish(error_dict, self.rout_key, self.corr_id, self.method) 
@@ -176,8 +177,8 @@ class get_farmer_data:
         for attr in attr_list: 
 
             match = re.search(r'[pP][pP][bB][nN][oO][=][=]', attr)
+            
             if match!=None:
-                print(attr)
                 attr_dict["PPBNO"] = re.sub(r'[pP][pP][bB][nN][oO][=][=]','',attr)
 
         return attr_dict
@@ -190,16 +191,13 @@ class get_farmer_data:
         :params query_type: temporal query 
         :return temporal end point: temporal endpoint consists of temporal queries
         """
-        temporal_dict = {}
         if self.json_object[query_type]["timerel"] == "during":
 
             start_date_value = datetime.datetime.strptime(self.json_object[query_type]["time"], time_format)
-            temporal_dict["StartDate"] = start_date_value.strftime(time_formatter)
-            
+            temporal_dict = {"StartDate": start_date_value.strftime(time_formatter)}
+
             end_date_value = datetime.datetime.strptime(self.json_object[query_type]["endtime"], time_format)
             temporal_dict["EndDate"] = end_date_value.strftime(time_formatter)
-
-            print(temporal_dict)
 
             return temporal_dict
 
@@ -224,14 +222,14 @@ class get_farmer_data:
                                 <WS_UserName>{}</WS_UserName>
                                 <WS_Password>{}</WS_Password>
                                 <PPBNO>{}</PPBNO>
-                                <StartDate>2022-08-22T12:01:05.000</StartDate>2007-11-28T16:00:00.000
-                                <EndDate>2022-08-22T12:10:05.000</EndDate>
+                                <StartDate>{}</StartDate>
+                                <EndDate>{}</EndDate>
                                 </Get_Farmer_CropData_ByPPBNo>
                             </soap:Body>
                         </soap:Envelope>""".format(self.iudx_username, self.iudx_password, end_dict["PPBNO"], end_dict["StartDate"], end_dict["EndDate"])
-
+    
             headers = {
-                'Content-Type': 'text/xml'
+                'Content-Type': 'text/xml;charset=UTF-8'
                 }
 
             req = Request(url, payload.encode('utf-8'), headers=headers )
@@ -244,21 +242,21 @@ class get_farmer_data:
             
             logging.error("An Http Error occurred: {}".format(eh))
             
-            dictionary["status"] = eh.code 
+            dictionary["statusCode"] = eh.code 
             dictionary["details"] =  eh.reason
             
         except urllib.error.URLError as eu:
             
             logging.error("An URL Error occurred: {}".format(eu))
             
-            dictionary["status"] = eu.reason.args[0]
+            dictionary["statusCode"] = eu.reason.args[0]
             dictionary["details"] =  str(eu.reason)
 
         except Exception as e:
             
             logging.error("An Unknown Error occurred: {}".format(e))
             
-            dictionary["status"] = 400
+            dictionary["statusCode"] = 400
             dictionary["details"] = 'An unknown error occurred while processing the request on the server'
 
 
@@ -267,28 +265,41 @@ class get_farmer_data:
     def fetch_response(self, status, response, dictionary):
         
         """
-        Fetching the response and status code from URL
-        :params status: Status of the response
-        :params response: response from the api
-        :return dictionary: dictionary which consists of status and results/details
+        Fetches the response and status code from the API
+        :param status: Status of the response
+        :param response: Response from the API
+        :param dictionary: Dictionary to store the response data
+        :return: Updated dictionary with status and results/details
         """
         
         resp_dict = xmltodict.parse(response.read())
 
-        if status==200:
+        if status == 200:
             soap = resp_dict["soap:Envelope"]["soap:Body"]
-
             response_json = json.loads(soap["Get_Farmer_CropData_ByPPBNoResponse"]["Get_Farmer_CropData_ByPPBNoResult"])
             success_flag = response_json["SuccessFlag"]
-            success_msg = response_json["SuccessMsg"]
 
-            if success_flag == "E":
-                dictionary['statusCode'] =  204
+            if success_flag == "0":
+                dictionary['statusCode'] = 204
+                success_msg = response_json["SuccessMsg"]
                 dictionary["details"] = success_msg
             
             else:
-                dictionary['statusCode'] =  status
-                dictionary["results"] = response_json["Data"]
+                dictionary['statusCode'] = status
+                json_array = response_json["Data"]
+
+                for json_object in json_array:
+                    observation_date = json_object.get("CropInfo_Dt", None)
+                    
+                    try:
+                        json_object["observationDateTime"] = f"{parser.parse(observation_date).isoformat()}+05:30"
+                        
+                    except Exception:
+                        json_object["observationDateTime"] = observation_date
+                    
+                    del json_object["CropInfo_Dt"]
+
+                dictionary["results"] = json_array
 
         return dictionary
 

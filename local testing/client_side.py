@@ -115,21 +115,16 @@ print(f"Sending Request: {cor_id}")
 # 	"ppbNumber": "T13010130530"
 # }
 
-
-
-
-
-
 json_object = {
 	"id": [
 		"rythubandhu.telangana.gov.in/1668984090c7e92e4c39e1e5d29300e6a9b2a11e/gateway.adex.org.in/rythubandhu-schemes/get-cb-data"
 	],
 	"temporal-query": {
-		"time": "2022-08-22T12:01:05Z",
-		"endtime": "2022-08-22T12:10:05Z",
+		"time": "2021-01-25T12:01:05Z",
+		"endtime": "2023-05-01T12:10:05Z",
 		"timerel": "during"
 	},
-	"attr-query": "Ppbno==T13010130530",
+	"attr-query": "Ppbno==T01050090085",
 	"searchType": "temporalSearch_attributeSearch",
 	"instanceID": "localhost:8443",
 	"applicableFilters": [
@@ -139,9 +134,6 @@ json_object = {
 	"publicKey": "None",
 	"ppbNumber": "T13010130530"
 }
-
-
-
 
 # json_object={
 #    "id":[

@@ -1,0 +1,507 @@
+{
+	"@context": "https://voc.iudx.org.in/",
+	"type": [
+		"adex:Resource",
+		"adex:Crop",
+		"iudx:Resource",
+		"iudx:Crop"
+	],
+	"id": "krishitantra.com/dd9561b09f5d63b59160388f96085a55d24e7795/gateway.adex.org.in/krishitantra-data/crop-data",
+	"name": "crop-data",
+	"label": "Crop and Cropland Information of KrishiTantra in Telangana State",
+	"description": "Publishes information of cropland and the crops that are sown in the agricultural land of KrishiTantra city in Telangana State.",
+	"tags": [
+		"krishitantra",
+		"variety",
+		"crop",
+		"commodity",
+		"market",
+		"village",
+		"land",
+		"crop",
+		"crop type",
+		"irrigation",
+		"area sown",
+		"land details"
+	],
+	"itemStatus": "ACTIVE",
+	"resourceGroup": "krishitantra.com/dd9561b09f5d63b59160388f96085a55d24e7795/gateway.adex.org.in/krishitantra-data",
+	"provider": "krishitantra.com/dd9561b09f5d63b59160388f96085a55d24e7795",
+	"resourceType": "MESSAGESTREAM",
+	"adexResourceAPIs": [
+		"ATTR",
+		"TEMPORAL"
+	],
+	"iudxResourceAPIs": [
+		"ATTR",
+		"TEMPORAL"
+	],
+	"location": {
+		"geometry": {
+			"coordinates": [
+				[
+					[
+						77.179011,
+						18.556975
+					],
+					[
+						77.047585,
+						15.14819
+					],
+					[
+						81.059914,
+						16.55208
+					],
+					[
+						81.384916,
+						17.721272
+					],
+					[
+						80.569225,
+						19.514793
+					],
+					[
+						78.217742,
+						20.06644
+					],
+					[
+						77.179011,
+						18.556975
+					]
+				]
+			],
+			"type": "Polygon"
+		},
+		"type": "Place",
+		"address": "Telangana"
+	},
+	"dataQueryParams": {
+		"@context": "https://agrijson.adex.org.in/",
+		"type": [
+			"iudx:Crop",
+			"adex:Crop"
+		],
+		"description": "Data query parameter details of crop and cropland information for farmer pattadar passBook(PPB) numbers in Telangana state.",
+		"PPBNO": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "Pattadar passbook number of the farmer corresponding to this observation."
+		},
+		"time": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "Describes the initial scheduled datetime of the record corresponding to this observation in ISO8601 datetime format."		},
+		"endtime": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "Describes the final scheduled datetime of the record corresponding to this observation in ISO8601 datetime format."
+		},
+		"timerel":{
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "Describes the relation between given datetime"
+
+		}
+	},
+	"dataAccessPurposes":[
+		{
+		   "name":"Agricultural credit",
+		   "description":"- Assessment of credit worthiness and extension of short,Medium, and long-term loans to farmers and the associated processes like recovery. - Extending credit to farmers basing on Negotiable Warehouse Receipts (NWR)."
+		},
+		{
+		   "name":"Insurance",
+		   "description":"- Providing crop insurance cover and disbursing of the amount assured on meeting the defined criteria.- Providing insurance cover for farm machinery."
+		},
+		{
+		   "name":"Logistics",
+		   "description":"Providing logistics services to the farmers for transportation of inputs and farm produce."
+		},
+		{
+		   "name":"Storage-related services",
+		   "description":"Providing storage facilities - normal and cold- to the farmer during the post-harvest period."
+		},
+		{
+		   "name":"Market-related services",
+		   "description":"- Enabling the producers to access the markets - physical or digital - for selling of their produce.- Providing personalised services relating to the sale of the produce, including hyper-local market intelligence."
+		},
+		{
+		   "name":"Payment services",
+		   "description":"Enabling electronic payments and receipts arising out of the transactions relating the purposes specified in this Standard."
+		},
+		{
+		   "name":"Farm advisories",
+		   "description":"- The entire range of personalised advisory services required for enhancing the production, productivity, and profitability of the farmer, including those relating to weather, inputs and good agricultural practices (GAP). - Digital extension services."
+		},
+		{
+		   "name":"Pest and disease management",
+		   "description":"- Prediction of pest and disease and provision of advisories on appropriate precautionary measures.- Services relating to controlling pests and diseases on their actual incidence."
+		},
+		{
+		   "name":"Water management",
+		   "description":"Services and advisories relating to irrigation practices,including micro-irrigation and distress irrigation."
+		},
+		{
+		   "name":"Quality assurance",
+		   "description":"- Providing quality assaying and assurance services on the inputs and farm produce - Providing traceability services for farm produce to the traders and end consumers."
+		},
+		{
+		   "name":"Soil Health",
+		   "description":"- Issuing Soil Health Cards (SHCs) to the farmers, in physical and electronic forms - Monitoring soil health through field observations and remote sensing methods."
+		},
+		{
+		   "name":"Benefits",
+		   "description":"Providing benefits to the farmer, in cash or kind by the central government, state governments and NGOs."
+		},
+		{
+		   "name":"Land Records",
+		   "description":"- Maintenance of land records and record of rights on land - Creation and maintenance of cadastral records specifying the field boundaries of agricultural parcels, digital form including geo-referencing, using GIS and GPS."
+		},
+		{
+		   "name":"Research",
+		   "description":"Agricultural research including applied research requiring Experimentation and demonstration at the field level."
+		},
+		{
+		   "name":"Innovation",
+		   "description":"Sample data in anonymized or de-identified conditions required for testing innovative solutions, including those involving emerging technologies like AI, ML, IoT."
+		},
+		{
+		   "name":"Education",
+		   "description":"Data required for agricultural education."
+		},
+		{
+		   "name":"Data Principal use",
+		   "description":"Data required for use of the data principal for monitoring and decision-making at various stages of the agriculture Cycle."
+		}
+	 ],
+	"dataDescriptor": {
+		"@context": "https://agrijson.adex.org.in/",
+		"type": [
+			"iudx:DataDescriptor",
+			"iudx:Crop",
+			"adex:DataDescriptor",
+			"adex:Crop"
+		],
+		"dataDescriptorLabel": "Data descriptor for Crop and Cropland info of KrishiTantra in Telangana State",
+		"description": "Data attribute details of cropland and the crops that are sown in the agricultural land of KrishiTantra city in Telangana State.",
+		"computedID": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "The computed ID corresponding to this observation.",
+			"dataSchema": "adex:Text"
+		},	
+		"id": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "The ID of the crop sown in the agricultural land corresponding to this observation.",
+			"dataSchema": "adex:Text"
+		},	
+		"location": {
+            "description": "Physical coordinates of the location of cropland corresponding to this observation.",
+            "type": [
+                "ValueDescriptor"
+            ],
+            "dataSchema": "iudx:Polygon"
+        },
+		"crop": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "The name of the crop sown in the agricultural land corresponding to this observation.",
+			"dataSchema": "adex:Text"
+		},		
+		"previousCrop": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "The name of the previous crop sown in the agricultural land corresponding to this observation.",
+			"dataSchema": "adex:Text"
+		},		
+		"previousYield": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "The yield of the previous crop sown in the agricultural land corresponding to this observation.",
+			"dataSchema": "adex:Text"
+		},		
+		"previousYieldPrice": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "The yield price of the previous crop sown in the agricultural land corresponding to this observation.",
+			"dataSchema": "adex:Text"
+		},		
+		"targetYield": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "The target yield of the crop sown in the agricultural land corresponding to this observation.",
+			"dataSchema": "adex:Text"
+		},		
+		"previousManure": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "The amount of manure for the previous crop sown in the agricultural land corresponding to this observation.",
+			"dataSchema": "adex:Text"
+		},	
+		"previousfertilizerQuantity": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "The previous fertilizer quantity of the crop sown in the agricultural land corresponding to this observation.",
+			"dataSchema": "adex:Text"
+		},
+		"results": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "The name of the crop sown in the agricultural land corresponding to this observation.",
+			"dataSchema": "adex:Text",
+			"B": {
+				"type": [
+					"ValueDescriptor"
+				],
+				"description": "The amount of boron in the crop sown in the agricultural land corresponding to this observation.",
+				"dataSchema": "adex:Text"
+			},
+			"Cu": {
+				"type": [
+					"ValueDescriptor"
+				],
+				"description": "The amount of copper in the crop sown in the agricultural land corresponding to this observation.",
+				"dataSchema": "adex:Text"
+			},
+			"EC": {
+				"type": [
+					"ValueDescriptor"
+				],
+				"description": "The amount of ethylene carbonate in the crop sown in the agricultural land corresponding to this observation.",
+				"dataSchema": "adex:Text"
+			},
+			"Fe": {
+				"type": [
+					"ValueDescriptor"
+				],
+				"description": "The amount of iron in the crop sown in the agricultural land corresponding to this observation.",
+				"dataSchema": "adex:Text"
+			},
+			"OC": {
+				"type": [
+					"ValueDescriptor"
+				],
+				"description": "The amount of oleoresin capsicum in the crop sown in the agricultural land corresponding to this observation.",
+				"dataSchema": "adex:Text"
+			},
+			"S": {
+				"type": [
+					"ValueDescriptor"
+				],
+				"description": "The amount of sulphur in the crop sown in the agricultural land corresponding to this observation.",
+				"dataSchema": "adex:Text"
+			},
+			"Zn": {
+		
+				"type": [
+					"ValueDescriptor"
+				],
+				"description": "The amount of zinc in the crop sown in the agricultural land corresponding to this observation.",
+				"dataSchema": "adex:Text"
+			},
+			"k": {
+				"type": [
+					"ValueDescriptor"
+				],
+				"description": "The amount of potassium in the crop sown in the agricultural land corresponding to this observation.",
+				"dataSchema": "adex:Text"
+			},
+			"p": {
+				"type": [
+					"ValueDescriptor"
+				],
+				"description": "The amount of phosphorous in the crop sown in the agricultural land corresponding to this observation.",
+				"dataSchema": "adex:Text"
+			},
+			"pH": {
+				"type": [
+					"ValueDescriptor"
+				],
+				"description": "The amount of phenyl in the crop sown in the agricultural land corresponding to this observation.",
+				"dataSchema": "adex:Text"
+			}
+		},
+		"testCentre": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "The name of the crop sown in the agricultural land corresponding to this observation.",
+			"dataSchema": "adex:Text",
+			"id": {
+				"type": [
+					"ValueDescriptor"
+				],
+				"description": "The name of the crop sown in the agricultural land corresponding to this observation.",
+				"dataSchema": "adex:Text"
+			},
+			"name": {
+				"type": [
+					"ValueDescriptor"
+				],
+				"description": "The name of the crop sown in the agricultural land corresponding to this observation.",
+				"dataSchema": "adex:Text"
+			},
+			"createdAt": {
+				"type": [
+					"ValueDescriptor"
+				],
+				"description": "Time at which the record is created corresponding to this observation",
+				"dataSchema": "iudx:DateTime"
+			},
+			"updatedAt": {
+				"type": [
+					"ValueDescriptor"
+				],
+				"description": "Time at which the record is updaed corresponding to this observation",
+				"dataSchema": "iudx:DateTime"
+			},
+			"testCentreCode": {
+				"type": [
+					"ValueDescriptor"
+				],
+				"description": "The name of the crop sown in the agricultural land corresponding to this observation.",
+				"dataSchema": "adex:Text"
+			}
+		},
+		"plot": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "The name of the crop sown in the agricultural land corresponding to this observation.",
+			"dataSchema": "adex:Text",
+			"surveyNo": {
+				"type": [
+					"ValueDescriptor"
+				],
+				"description": "The name of the crop sown in the agricultural land corresponding to this observation.",
+				"dataSchema": "adex:Text"
+				
+			}
+			
+		},
+		"createdAt": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "Time at which the record is created corresponding to this observation",
+			"dataSchema": "iudx:DateTime"
+		},
+		"updatedAt": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "Time at which the record is updaed corresponding to this observation",
+			"dataSchema": "iudx:DateTime"
+		},
+		"startedAt": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "Time at which the crop is sowned corresponding to this observation",
+			"dataSchema": "iudx:DateTime"
+		},
+		"endedAt": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "Time at which the crop cultivation is ended corresponding to this observation",
+			"dataSchema": "iudx:DateTime"
+		},
+		"sampleDate": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "sample date of observation.",
+			"dataSchema": "adex:Date"
+		},
+
+		"testCompletedAt": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "Describes the datetime at which the crop test is completed corresponding to this observation",
+			"dataSchema": "adex:Text"
+		}
+	},
+	"dataSample": {
+		"computedID": "digitalgreen00001-20220611-00003",
+		"id": "62a4853822c9fe001a37a436",
+		"location": {
+			"type": "Polygon",
+			"coordinates": [
+				[
+					[
+						80.08143614977598,
+						17.303484375140563
+					],
+					[
+						80.08049637079239,
+						17.30380703811607
+					],
+					[
+						80.0806925073266,
+						17.304120097485768
+					],
+					[
+						80.08155919611454,
+						17.30373789609754
+					],
+					[
+						80.08143614977598,
+						17.303484375140563
+					]
+				]
+			]
+		},
+		"crop": "chilli (rainfed)",
+		"previousCrop": "chilli (irrigated)",
+		"previousYield": 0,
+		"previousYieldPrice": 0,
+		"targetYield": 0,
+		"previousManure": 0,
+		"previousfertilizerQuantity": {},
+		"results": {
+			"B": 0.33,
+			"Cu": 0.31,
+			"EC": 0.4,
+			"Fe": 2.62,
+			"OC": 0.65,
+			"S": 16.6,
+			"Zn": 0.68,
+			"k": 181,
+			"n": 218,
+			"p": 16.9,
+			"pH": 5.5
+		},
+		"testCentre": {
+			"id": "6296fe392bca3f0013a31f9e",
+			"name": "Raithu Vedika",
+			"createdAt": "2022-06-01T05:50:49.492Z",
+			"updatedAt": "2022-06-01T05:50:49.492Z",
+			"testCentreCode": "digitalgreen00001"
+		},
+		"plot": {
+			"surveyNo": ""
+		},
+		"createdAt": "2022-06-11T12:06:16.620Z",
+		"updatedAt": "2022-12-18T10:06:15.713Z",
+		"startedAt": null,
+		"endedAt": null,
+		"sampleDate": "2022-06-11T12:06:16.620Z",
+		"testCompletedAt": "2022-07-06T05:44:45.195Z"
+	}
+}

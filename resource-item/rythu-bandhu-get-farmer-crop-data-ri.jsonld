@@ -92,13 +92,12 @@
 			"type": [
 				"ValueDescriptor"
 			],
-			"description": "Describes the initial scheduled datetime of the record corresponding to this observation and is described in '%Y-%m-%dT%H:%M:%SZ'  format, for eg. '2022-08-22T12:01:05Z'."
-		},
+			"description": "Describes the initial scheduled datetime of the record corresponding to this observation in ISO8601 datetime format."		},
 		"endtime": {
 			"type": [
 				"ValueDescriptor"
 			],
-			"description": "Describes the final scheduled datetime of the record corresponding to this observation and is described in '%Y-%m-%dT%H:%M:%SZ' format, for eg. '2022-08-22T12:10:05Z'."
+			"description": "Describes the final scheduled datetime of the record corresponding to this observation in ISO8601 datetime format."
 		},
 		"timerel":{
 			"type": [
@@ -108,6 +107,76 @@
 
 		}
 	},
+	"dataAccessPurposes":[
+		{
+		   "name":"Agricultural credit",
+		   "description":"- Assessment of credit worthiness and extension of short,Medium, and long-term loans to farmers and the associated processes like recovery. - Extending credit to farmers basing on Negotiable Warehouse Receipts (NWR)."
+		},
+		{
+		   "name":"Insurance",
+		   "description":"- Providing crop insurance cover and disbursing of the amount assured on meeting the defined criteria.- Providing insurance cover for farm machinery."
+		},
+		{
+		   "name":"Logistics",
+		   "description":"Providing logistics services to the farmers for transportation of inputs and farm produce."
+		},
+		{
+		   "name":"Storage-related services",
+		   "description":"Providing storage facilities - normal and cold- to the farmer during the post-harvest period."
+		},
+		{
+		   "name":"Market-related services",
+		   "description":"- Enabling the producers to access the markets - physical or digital - for selling of their produce.- Providing personalised services relating to the sale of the produce, including hyper-local market intelligence."
+		},
+		{
+		   "name":"Payment services",
+		   "description":"Enabling electronic payments and receipts arising out of the transactions relating the purposes specified in this Standard."
+		},
+		{
+		   "name":"Farm advisories",
+		   "description":"- The entire range of personalised advisory services required for enhancing the production, productivity, and profitability of the farmer, including those relating to weather, inputs and good agricultural practices (GAP). - Digital extension services."
+		},
+		{
+		   "name":"Pest and disease management",
+		   "description":"- Prediction of pest and disease and provision of advisories on appropriate precautionary measures.- Services relating to controlling pests and diseases on their actual incidence."
+		},
+		{
+		   "name":"Water management",
+		   "description":"Services and advisories relating to irrigation practices,including micro-irrigation and distress irrigation."
+		},
+		{
+		   "name":"Quality assurance",
+		   "description":"- Providing quality assaying and assurance services on the inputs and farm produce - Providing traceability services for farm produce to the traders and end consumers."
+		},
+		{
+		   "name":"Soil Health",
+		   "description":"- Issuing Soil Health Cards (SHCs) to the farmers, in physical and electronic forms - Monitoring soil health through field observations and remote sensing methods."
+		},
+		{
+		   "name":"Benefits",
+		   "description":"Providing benefits to the farmer, in cash or kind by the central government, state governments and NGOs."
+		},
+		{
+		   "name":"Land Records",
+		   "description":"- Maintenance of land records and record of rights on land - Creation and maintenance of cadastral records specifying the field boundaries of agricultural parcels, digital form including geo-referencing, using GIS and GPS."
+		},
+		{
+		   "name":"Research",
+		   "description":"Agricultural research including applied research requiring Experimentation and demonstration at the field level."
+		},
+		{
+		   "name":"Innovation",
+		   "description":"Sample data in anonymized or de-identified conditions required for testing innovative solutions, including those involving emerging technologies like AI, ML, IoT."
+		},
+		{
+		   "name":"Education",
+		   "description":"Data required for agricultural education."
+		},
+		{
+		   "name":"Data Principal use",
+		   "description":"Data required for use of the data principal for monitoring and decision-making at various stages of the agriculture Cycle."
+		}
+	 ],
 	"dataDescriptor": {
 		"@context": "https://agrijson.adex.org.in/",
 		"type": [
@@ -248,7 +317,14 @@
 			],
 			"description": "Describes the datetime of the crop information corresponding to this observation",
 			"dataSchema": "adex:Text"
-		}
+		},
+		"observationDateTime": {
+			"type": [
+				"ValueDescriptor"
+			],
+			"description": "Last reported time of observation.",
+			"dataSchema": "adex:DateTime"
+		  }
 	},
 	"dataSample": {
 		"FarmerName": "జక్కుల ప్రమోద్",
@@ -266,7 +342,6 @@
 		"CropName": " Paddy",
 		"CropVarietyName": "BPT 5204",
 		"CropSown_Acres": 0,
-		"CropSown_Guntas": 37,
-		"CropInfo_Dt": "Aug 22 2022 12:01PM"
+		"CropSown_Guntas": 37
 	}
 }
